@@ -41,7 +41,9 @@ def main():
                 #print(f'{initials} {cuid}  ------  {full_name}')
             
 
-    orders_to_check = []
+    #orders_to_check = []
+    orders_to_check = {}
+
     # read orders csv file line by line 
     with open(orders_filepath, 'r') as f:
         reader = csv.reader(f)
@@ -52,7 +54,9 @@ def main():
                 ordered_year = ordered.split('-')[0]
                 if ordered_year == year_to_check:
                     order_id = order[0]
-                    orders_to_check.append(order_id)
+                    #orders_to_check.append(order_id) # actually let's use a dictionary
+                    orders_to_check[order_id] = order[1]  # order_id : customer_id
+
 
                     # ugh.. at this point I really want to just do this with SQL. Do I have a database handy? 
 
@@ -99,34 +103,49 @@ def main():
         this_order = []
         prev_id = False
         for item_row in reader:
-            if item_row[0] != prev_id:
-                # check items for coffee and bagles
 
-                prev_id = item_row[0]
+            this_id = item_row[0]
+            if this_id != prev_id: # not air tight on first row, but will work for this one off.
+                # noew order, should we check the prev? 
+                if prev_id in orders_to_check:
+                    # check items for coffee and bagles
+                    if coffee_sku in this_order and any(bagel in this_order for bagel in bagel_skus):
+                        print("\n\n Found one")
+                        print(f'Order is {prev_id=}')
+                        # so cust is 
+                        cust_saught = orders_to_check[prev_id]
+                        print(f'Customer is {cust_saught=}')
+                        break
+                        order_to_lookup = prev_id
+
+
+                # reset for new order
+                prev_id = this_id
                 this_order = []
+            # back to this item
 
-
-            if item_row[0] in orders_to_check:
-                sku = item_row[1]
-                this_order.append(sku)
-                print(f'{item_row=}')
-                jj += 1
-                if jj > 10:
-                    quit()
-                    
-
-
-                    '''
-                    select ... from ... where oitems.sku = products.sku
-                    '''
+            sku = item_row[1]
+            #print (".", end="")
+            #print(f'{sku=}')
+            this_order.append(sku)
+            #print(f'{item_row=}')
 
 
 
 
 
 
+                    #jj += 1
+                    #if jj > 10:
+                    #    quit()
+                        
 
-                    '''
+
+
+
+
+
+'''
 
                     noahs-orders_items.csv
                     orderid,sku,qty,unit_price
@@ -146,7 +165,7 @@ def main():
 
                     
 
-                    '''
+                '''
 
 
                 
