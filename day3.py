@@ -15,7 +15,7 @@ year_to_check = '2017'
 # But for this one off, I'll finish the python script, with some hard coded stuff, like above.
 
 def main():
-    c_uids = []
+    c_uids = {}
 
     
     # read customers csv file line by line 
@@ -37,8 +37,10 @@ def main():
             initials = ''.join([first_name[0], last_name[0]])
             if initials == initials_to_check:
                 cuid = row[0]
-                c_uids.append(cuid)
-                #print(f'{initials} {cuid}  ------  {full_name}')
+                phone_number = row[5]
+                #print(f'{initials} {cuid}  ------  {full_name}  {phone_number}')
+                #c_uids.append(cuid)
+                c_uids[cuid] = phone_number
             
 
     #orders_to_check = []
@@ -115,6 +117,7 @@ def main():
                         # so cust is 
                         cust_saught = orders_to_check[prev_id]
                         print(f'Customer is {cust_saught=}')
+                        print(f'Phone number is {c_uids[cust_saught]}')
                         break
                         order_to_lookup = prev_id
 
