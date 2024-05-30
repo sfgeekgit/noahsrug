@@ -1,0 +1,36 @@
+Day 1:
+516-821-8454
+
+Day 2:
+Rosenkranz matches 
+767-365-7269
+
+Day 3:
+ Found one
+Order is prev_id='5618'
+Customer is cust_saught='5745'
+Phone number is 838-351-0370
+
+Day 4:
+914-594-5535
+
+
+Day5:  (Are these day numbers off by one?? Maybe "one" should be zero? The Shamus?
+716-789-4433
+6455,"Brittany Harmon","8892A Shore Rd","Brooklyn, NY 11209","1967-01-12","716-789-4433","America/New_York",40.63201,-74.03621
+
+
+Day 6:
+347-835-2358
+
+
+Day "7":
+SELECT * FROM customers where customerid = 8884
+838-295-7143
+
+Day "8":
+# Jeremy Burch	516-544-4187	73256	9931
+
+
+Day "9" final day
+516-638-9966
